@@ -5,11 +5,18 @@ module Feedzirra
     end
 
     def parse_datetime(string)
+      dt = nil
       begin
-        DateTime.parse(string).feed_utils_to_gm_time
+        dt = DateTime.parse(string)
       rescue
         puts "DATE CAN'T BE PARSED: #{string}"
         nil
+      end
+
+      begin
+        dt = dt.feed_utils_to_gm_time
+      rescue
+        puts "CANNOT FEED_UTILS_TO_GM_TIME"
       end
     end
 
