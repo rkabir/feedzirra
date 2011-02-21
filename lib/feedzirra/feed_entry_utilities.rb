@@ -1,9 +1,9 @@
 module Feedzirra
-  module FeedEntryUtilities    
-    def published    
+  module FeedEntryUtilities
+    def published
       @published || @updated
     end
-    
+
     def parse_datetime(string)
       begin
         DateTime.parse(string).feed_utils_to_gm_time
@@ -12,23 +12,23 @@ module Feedzirra
         nil
       end
     end
-    
+
     ##
     # Returns the id of the entry or its url if not id is present, as some formats don't support it
-    def id  
+    def eid
       @entry_id || @url
     end
-          
+
     ##
     # Writter for published. By default, we keep the "oldest" publish time found.
-    def published=(val) 
+    def published=(val)
       parsed = parse_datetime(val)
-      @published = parsed if !@published || parsed < @published     
+      @published = parsed if !@published || parsed < @published
     end
-        
+
     ##
     # Writter for udapted. By default, we keep the most recenet update time found.
-    def updated=(val) 
+    def updated=(val)
       parsed = parse_datetime(val)
       @updated = parsed if !@updated || parsed > @updated
     end
@@ -39,7 +39,7 @@ module Feedzirra
       self.summary.sanitize! if self.summary
       self.content.sanitize! if self.content
     end
-    
+
     alias_method :last_modified, :published
   end
 end
