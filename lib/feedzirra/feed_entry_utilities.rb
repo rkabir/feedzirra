@@ -10,7 +10,6 @@ module Feedzirra
         dt = DateTime.parse(string)
       rescue
         puts "DATE CAN'T BE PARSED: #{string}"
-        nil
       end
 
       begin
